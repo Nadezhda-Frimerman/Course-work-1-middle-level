@@ -66,6 +66,10 @@ public class Employee {
         return String.format("ИН: %s, ФИО: %s %s %s, отдел: %s, заработная плата: %.2f руб.",
                 id, firstName, middleName, lastname, department, salary);
     }
+    public String printPersonWithOutDepartment() {
+        return String.format("ИН: %s, ФИО: %s %s %s, заработная плата: %.2f руб.",
+                id, firstName, middleName, lastname, salary);
+    }
 
     public static void printAllEmployees(Employee[] s) {
         for (int a = 0; a <= s.length - 1; a++) {
