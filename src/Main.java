@@ -1,6 +1,5 @@
 public class Main {
     static Employee[] employees = new Employee[10];
-
     public static void main(String[] args) {
         employees[0] = new Employee("Карманова", "Ольга", "Валерьевна", 3, 51200);
         employees[1] = new Employee("Аронова", "Наталья", "Павловна", 1, 32800);
@@ -35,7 +34,6 @@ public class Main {
         printEmployeesSalaryLess(employees,fixSalary);
         System.out.printf("Сотрудники, зарплата которых больше %s %n",fixSalary);
         printEmployeesSalaryMore(employees,fixSalary);
-
     }
 
     public static void printAllEmployees(Employee[] employees) {
@@ -43,7 +41,6 @@ public class Main {
             System.out.println(employees[a]);
         }
     }
-
     public static double sumSalary(Employee[] employees) {
         double sumSalary = 0;
         for (int i = 0; i <= employees.length - 1; i++) {
@@ -51,7 +48,6 @@ public class Main {
         }
         return sumSalary;
     }
-
     public static Employee findMinSalaryEmployee(Employee[] employees) {
         double minSalary = employees[0].getSalary();
         int numberMinSalary = 0;
@@ -63,7 +59,6 @@ public class Main {
         }
         return employees[numberMinSalary];
     }
-
     public static Employee findMaxSalaryEmployee(Employee[] employees) {
         double maxSalary = employees[0].getSalary();
         int numberMaxSalary = 0;
@@ -75,18 +70,15 @@ public class Main {
         }
         return employees[numberMaxSalary];
     }
-
     public static double findAverageSalary(Employee[] employees) {
         return sumSalary(employees) / employees.length;
         }
-
     public static void printPersonsList(Employee[] employees) {
         System.out.println("Список сотрудников:");
         for (int i = 0; i <= employees.length - 1; i++) {
             System.out.println(employees[i].getFirstName() + " " + employees[i].getMiddleName() + " " + employees[i].getLastname());
         }
     }
-
     public static void indexingSalary(int index){
         if (index<=0) {
             throw new IllegalArgumentException("Некорректный ввод индекса.");}

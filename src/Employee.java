@@ -18,12 +18,9 @@ public class Employee {
         this.salary = salary;
         this.id = idCounter++;
     }
-
-
     public double getSalary() {
         return salary;
     }
-
     public void setSalary(double salary) {
         this.salary = salary;
     }
@@ -43,11 +40,9 @@ public class Employee {
     public String getMiddleName() {
         return middleName;
     }
-
     public String getFirstName() {
         return firstName;
     }
-
 
     public int hashCode() {
         return Objects.hash(firstName, middleName, lastname, department, salary);
@@ -61,7 +56,6 @@ public class Employee {
                 Objects.equals(lastname, employee.lastname) && department == employee.department
                 && salary == employee.salary && id == employee.id;
     }
-
     public String toString() {
         return String.format("ИН: %s, ФИО: %s %s %s, отдел: %s, заработная плата: %.2f руб.",
                 id, firstName, middleName, lastname, department, salary);
