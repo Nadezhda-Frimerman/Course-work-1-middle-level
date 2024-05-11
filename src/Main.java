@@ -22,7 +22,7 @@ public class Main {
         System.out.println("Индексирование зарплаты.");
         indexingSalary(10);
         printAllEmployees(employees);
-        int numberOfDepartment=3;
+        int numberOfDepartment=4;
         System.out.println("Информация по отделу "+numberOfDepartment);
         System.out.printf("Сотрудник с минимальной зарплатой в отделе %s:%n%s%n",numberOfDepartment, findMinSalaryDepartment(employees,numberOfDepartment));
         System.out.printf("Сотрудник с максимальной зарплатой в отделе %s:%n%s%n",numberOfDepartment, findMaxSalaryDepartment(employees,numberOfDepartment));
@@ -30,7 +30,7 @@ public class Main {
         System.out.printf("Среднее значение ЗП в месяц в отделе %s: %.2f рублей.%n", numberOfDepartment, findAverageSalaryDepartment(employees,numberOfDepartment));
         indexingSalaryDepartment(5,numberOfDepartment);
         printPersonsListDepartment(employees,numberOfDepartment);
-        int fixSalary=38000;
+        int fixSalary=50000;
         System.out.printf("Сотрудники, зарплата которых меньше %s %n",fixSalary);
         printEmployeesSalaryLess(employees,fixSalary);
         System.out.printf("Сотрудники, зарплата которых больше %s %n",fixSalary);
@@ -77,9 +77,8 @@ public class Main {
     }
 
     public static double findAverageSalary(Employee[] employees) {
-        double averageSalary = sumSalary(employees) / employees.length;
-        return averageSalary;
-    }
+        return sumSalary(employees) / employees.length;
+        }
 
     public static void printPersonsList(Employee[] employees) {
         System.out.println("Список сотрудников:");
@@ -89,30 +88,38 @@ public class Main {
     }
 
     public static void indexingSalary(int index){
-        for (int i = 0; i <= employees.length - 1; i++){
-           double newSalary = (1+ (double) index /100)*employees[i].getSalary();
-           employees[i].setSalary(newSalary);
+        if (index<=0) {
+            throw new IllegalArgumentException("Некорректный ввод индекса.");}
+        else {
+            for (int i = 0; i <= employees.length - 1; i++) {
+                double newSalary = (1 + (double) index / 100) * employees[i].getSalary();
+                employees[i].setSalary(newSalary);
+            }
         }
     }
-    public static Employee[] sortDepartment(int departmentNumber){
-        int departmentAmount=0;
-        for (int i = 0; i <= employees.length-1; i++){
-            if (employees[i].getDepartment()==departmentNumber){
-                departmentAmount++;
+    public static Employee[] sortDepartment(Employee[] employees,int departmentNumber){
+        if (departmentNumber<=0||departmentNumber>5) {
+            throw new IllegalArgumentException("Некорректный ввод номера отдела.");}
+        else {
+            int departmentAmount = 0;
+            for (int i = 0; i <= employees.length - 1; i++) {
+                if (employees[i].getDepartment() == departmentNumber) {
+                    departmentAmount++;
+                }
             }
-        }
-        Employee[] departmentEmployees=new Employee[departmentAmount];
-        int d=0;
-        for (int i = 0; i <= employees.length - 1; i++){
-            if (employees[i].getDepartment()==departmentNumber){
-                departmentEmployees[d]=employees[i];
-                d++;
+            Employee[] departmentEmployees = new Employee[departmentAmount];
+            int d = 0;
+            for (int i = 0; i <= employees.length - 1; i++) {
+                if (employees[i].getDepartment() == departmentNumber) {
+                    departmentEmployees[d] = employees[i];
+                    d++;
+                }
             }
+            return departmentEmployees;
         }
-        return departmentEmployees;
     }
     public static Employee findMinSalaryDepartment(Employee[] employees,int departmentNumber) {
-        Employee[] departmentEmployees=sortDepartment(departmentNumber);
+        Employee[] departmentEmployees=sortDepartment(employees,departmentNumber);
         double minSalary = departmentEmployees[0].getSalary();
         int numberMinSalary = 0;
         for (int i = 0; i <= departmentEmployees.length - 1; i++) {
@@ -124,7 +131,7 @@ public class Main {
         return departmentEmployees[numberMinSalary];
     }
     public static Employee findMaxSalaryDepartment(Employee[] employees,int departmentNumber) {
-        Employee[] departmentEmployees=sortDepartment(departmentNumber);
+        Employee[] departmentEmployees=sortDepartment(employees,departmentNumber);
         double maxSalary = departmentEmployees[0].getSalary();
         int numberMaxSalary = 0;
         for (int i = 0; i <= departmentEmployees.length - 1; i++) {
@@ -136,7 +143,7 @@ public class Main {
         return departmentEmployees[numberMaxSalary];
     }
     public static double sumSalaryDepartment(Employee[] employees,int departmentNumber) {
-        Employee[] departmentEmployees=sortDepartment(departmentNumber);
+        Employee[] departmentEmployees=sortDepartment(employees,departmentNumber);
         double sumSalary = 0;
         for (int i = 0; i <= departmentEmployees.length - 1; i++) {
             sumSalary += departmentEmployees[i].getSalary();
@@ -144,12 +151,11 @@ public class Main {
         return sumSalary;
     }
     public static double findAverageSalaryDepartment(Employee[] employees,int departmentNumber) {
-        Employee[] departmentEmployees = sortDepartment(departmentNumber);
-        double averageSalary = sumSalary(departmentEmployees) / departmentEmployees.length;
-        return averageSalary;
-    }
+        Employee[] departmentEmployees = sortDepartment(employees,departmentNumber);
+        return sumSalary(departmentEmployees) / departmentEmployees.length;
+        }
     public static void indexingSalaryDepartment(int index,int departmentNumber){
-        Employee[] departmentEmployees=sortDepartment(departmentNumber);
+        Employee[] departmentEmployees=sortDepartment(employees,departmentNumber);
         for (int i = 0; i <= departmentEmployees.length - 1; i++){
             double newSalary = (1+ (double) index /100)*departmentEmployees[i].getSalary();
             departmentEmployees[i].setSalary(newSalary);
@@ -157,7 +163,7 @@ public class Main {
     }
     public static void printPersonsListDepartment(Employee[] employees,int departmentNumber) {
         System.out.printf("Список сотрудников отдела %s:%n",departmentNumber);
-        Employee[] departmentEmployees=sortDepartment(departmentNumber);
+        Employee[] departmentEmployees=sortDepartment(employees,departmentNumber);
         for (int i = 0; i <= departmentEmployees.length - 1; i++) {
             System.out.println(departmentEmployees[i].printPersonWithOutDepartment());
         }

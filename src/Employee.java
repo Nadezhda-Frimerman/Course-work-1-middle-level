@@ -70,21 +70,5 @@ public class Employee {
         return String.format("ИН: %s, ФИО: %s %s %s, заработная плата: %.2f руб.",
                 id, firstName, middleName, lastname, salary);
     }
-
-    public static void printAllEmployees(Employee[] s) {
-        for (int a = 0; a <= s.length - 1; a++) {
-            System.out.println(s[a]);
-        }
-    }
-
-    public static double sumSalary(Employee[] A) {
-        double sumSalary = 0;
-        for (int i = 0; i <= A.length - 1; i++) {
-            sumSalary += A[i].getSalary();
-        }
-        return sumSalary;
-    }
-
-
 }
 
